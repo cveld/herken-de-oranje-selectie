@@ -1,0 +1,39 @@
+:root {
+  --oranje: #f36c21;
+  --donker: #1a1a2e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--donker);
+  color: #fff;
+}
+
+.app {
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  color: var(--oranje);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  opacity: 0.8;
+  margin-top: 0;
+}
+
+.placeholder {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
