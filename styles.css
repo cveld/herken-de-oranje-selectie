@@ -1,39 +1,225 @@
 :root {
   --oranje: #f36c21;
+  --oranje-dark: #d2551a;
   --donker: #1a1a2e;
+  --donker-2: #24243e;
+  --kaart: #2d2d4d;
+  --tekst: #ffffff;
+  --tekst-dim: #b9b9d6;
+  --groen: #2ecc71;
+  --rood: #e74c3c;
+  --radius: 18px;
 }
 
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--donker);
-  color: #fff;
+  background: radial-gradient(circle at top, var(--donker-2), var(--donker));
+  color: var(--tekst);
+  -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
 }
 
-.app {
-  text-align: center;
-  padding: 2rem;
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 32px) 16px 48px;
 }
 
-h1 {
+/* ---------- Hub ---------- */
+.hub-header { text-align: center; margin-bottom: 28px; }
+.hub-header h1 {
   color: var(--oranje);
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.7rem, 6vw, 2.6rem);
+  margin: 0 0 6px;
+  line-height: 1.1;
+}
+.subtitle { color: var(--tekst-dim); margin: 0; }
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+.hub-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  text-align: left;
+  background: var(--kaart);
+  border: none;
+  border-radius: var(--radius);
+  padding: 20px;
+  color: var(--tekst);
+  cursor: pointer;
+  min-height: 130px;
+  transition: transform .12s ease, background .12s ease;
+}
+.hub-card:active { transform: scale(.97); background: #34345c; }
+.hub-icon { font-size: 2rem; }
+.hub-name { font-size: 1.15rem; font-weight: 700; }
+.hub-desc { font-size: .9rem; color: var(--tekst-dim); }
+
+/* ---------- Game chrome ---------- */
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.game-title { font-size: 1.2rem; margin: 0; flex: 1; text-align: center; }
+.spacer { width: 64px; }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #ffffff33;
+  color: var(--tekst);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: .95rem;
+  cursor: pointer;
+  min-height: 40px;
+}
+.btn-ghost:active { background: #ffffff14; }
+
+.progress {
+  height: 8px;
+  background: #ffffff1a;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--oranje);
+  transition: width .3s ease;
 }
 
-.subtitle {
-  opacity: 0.8;
-  margin-top: 0;
+/* ---------- Prompt / avatar ---------- */
+.prompt { text-align: center; margin-bottom: 22px; }
+.avatar svg { display: block; margin: 0 auto; border-radius: 50%; }
+.prompt-name { font-size: 1.3rem; font-weight: 700; margin: 14px 0 0; }
+
+/* ---------- Keuze-knoppen ---------- */
+.options { display: grid; gap: 12px; }
+.pos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.option {
+  background: var(--kaart);
+  border: 2px solid transparent;
+  color: var(--tekst);
+  border-radius: 14px;
+  padding: 18px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 60px;
+  transition: transform .1s ease, background .1s ease;
+}
+.option:active { transform: scale(.98); }
+.option:disabled { cursor: default; }
+.option.correct { background: var(--groen); border-color: var(--groen); color: #06371b; }
+.option.wrong { background: var(--rood); border-color: var(--rood); }
+
+/* ---------- Koppel het rugnummer ---------- */
+.match-status {
+  text-align: center;
+  color: var(--tekst-dim);
+  min-height: 1.4em;
+  margin: 0 0 16px;
+}
+.match-board {
+  display: grid;
+  grid-template-columns: 1fr 88px;
+  gap: 14px;
+  align-items: start;
+}
+.match-col { display: grid; gap: 10px; }
+.match-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--kaart);
+  border: 2px solid transparent;
+  color: var(--tekst);
+  border-radius: 14px;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  min-height: 64px;
+}
+.match-player .avatar svg { width: 48px; height: 48px; }
+.match-name { font-weight: 600; font-size: .98rem; }
+.match-player.selected { border-color: var(--oranje); background: #3a3a63; }
+.match-player.locked { opacity: .45; }
+
+.numbers-col { gap: 10px; }
+.num-chip {
+  background: var(--oranje);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.num-chip.locked { background: var(--groen); color: #06371b; }
+.num-chip.shake { animation: shake .4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
 }
 
-.placeholder {
-  margin-top: 2rem;
-  font-size: 1.1rem;
+/* ---------- Resultaten ---------- */
+.results { text-align: center; padding-top: 30px; }
+.results h2 { margin: 0 0 12px; }
+.score-big { font-size: 4rem; font-weight: 800; color: var(--oranje); }
+.score-big span { font-size: 1.6rem; color: var(--tekst-dim); }
+.results-msg { color: var(--tekst-dim); margin: 8px 0 28px; }
+.results-actions { display: grid; gap: 12px; max-width: 280px; margin: 0 auto; }
+.btn, .btn-secondary {
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 56px;
 }
+.btn { background: var(--oranje); color: #fff; }
+.btn:active { background: var(--oranje-dark); }
+.btn-secondary { background: var(--kaart); color: var(--tekst); }
+
+/* ---------- Leermodus ---------- */
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+}
+.study-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  background: var(--kaart);
+  border-radius: 14px;
+  padding: 14px 10px;
+}
+.study-card strong { font-size: .95rem; }
+.study-meta { font-size: .82rem; color: var(--oranje); }
+.study-club { font-size: .78rem; color: var(--tekst-dim); }
