@@ -75,7 +75,7 @@ body {
   margin-bottom: 16px;
 }
 .game-title { font-size: 1.2rem; margin: 0; flex: 1; text-align: center; }
-.spacer { width: 64px; }
+.spacer { min-width: 64px; display: flex; justify-content: flex-end; }
 .btn-ghost {
   background: transparent;
   border: 1px solid #ffffff33;
@@ -87,6 +87,21 @@ body {
   min-height: 40px;
 }
 .btn-ghost:active { background: #ffffff14; }
+
+/* Avatar/foto-toggle in de leermodus */
+.btn-toggle {
+  background: #ffffff14;
+  border: 1px solid #ffffff33;
+  color: var(--tekst);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 40px;
+  white-space: nowrap;
+}
+.btn-toggle:active { background: #ffffff24; }
 
 .progress {
   height: 8px;
@@ -103,8 +118,37 @@ body {
 
 /* ---------- Prompt / avatar ---------- */
 .prompt { text-align: center; margin-bottom: 22px; }
+.avatar { display: inline-block; line-height: 0; }
 .avatar svg { display: block; margin: 0 auto; border-radius: 50%; }
+.prompt .avatar { margin: 0 auto; }
 .prompt-name { font-size: 1.3rem; font-weight: 700; margin: 14px 0 0; }
+
+/* Echte foto's (rond geclipt, badge optioneel) */
+.avatar-photo { position: relative; border-radius: 50%; overflow: hidden; }
+.avatar-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+.avatar-number {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #1a1a2e;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* ---------- Keuze-knoppen ---------- */
 .options { display: grid; gap: 12px; }
@@ -157,7 +201,10 @@ body {
   text-align: left;
   min-height: 64px;
 }
-.match-player .avatar svg { width: 48px; height: 48px; }
+.match-player .avatar { width: 48px; height: 48px; }
+.match-player .avatar svg,
+.match-player .avatar-photo { width: 48px; height: 48px; }
+.match-player .avatar-number { min-width: 18px; height: 18px; font-size: .6rem; border-width: 1.5px; }
 .match-name { font-weight: 600; font-size: .98rem; }
 .match-player.selected { border-color: var(--oranje); background: #3a3a63; }
 .match-player.locked { opacity: .45; }
@@ -223,3 +270,22 @@ body {
 .study-card strong { font-size: .95rem; }
 .study-meta { font-size: .82rem; color: var(--oranje); }
 .study-club { font-size: .78rem; color: var(--tekst-dim); }
+
+/* ---------- Fotoverantwoording ---------- */
+.credits {
+  margin-top: 28px;
+  background: #ffffff0d;
+  border: 1px solid #ffffff1a;
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+.credits summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--tekst-dim);
+}
+.credits-intro { color: var(--tekst-dim); font-size: .85rem; }
+.credits ul { margin: 8px 0 0; padding-left: 18px; }
+.credits li { font-size: .82rem; color: var(--tekst-dim); margin-bottom: 6px; }
+.credits a { color: var(--oranje); }
+.credits a img { display: none; } /* sommige auteurs-velden bevatten <img> uit Commons */

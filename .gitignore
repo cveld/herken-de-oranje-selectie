@@ -13,3 +13,15 @@ Thumbs.db
 
 # Build output
 dist/
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Sync-tool cache
+/scripts/.cache/
+
+# Claude Code local settings (personal permissions)
+.claude/settings.local.json
